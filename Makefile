@@ -5,7 +5,7 @@ OS = $(shell uname | tr A-Z a-z)
 
 .PHONY: test
 test: ## Run tests
-	poetry run pytest --cov=pydantic_json_schema tests/
+	poetry run pytest --cov=project tests/
 
 
 .PHONY: clean
