@@ -5,7 +5,7 @@ OS = $(shell uname | tr A-Z a-z)
 
 .PHONY: test
 test: ## Run tests
-	poetry run pytest --cov=template_project tests/
+	poetry run pytest --cov=sample_package tests/
 
 
 .PHONY: clean
@@ -22,6 +22,12 @@ clean: ## Cleans project folder mainly cache
 	rm -f .coverage
 	rm -f .coverage.*
 	rm -rf build
+
+.PHONY: setup
+setup: ## Initial setup for project
+	python scripts/setup_project.py
+
+
 
 .PHONY: help
 .DEFAULT_GOAL := help
