@@ -6,9 +6,9 @@ from typing import Generator, List, Tuple
 
 REPO_BASE = (Path(__file__).parent / "..").resolve()
 
-FILES_TO_REMOVE = {
+FILES_TO_REMOVE = [
     REPO_BASE / "scripts" / "setup_project.py",
-}
+]
 
 GITIGNORE_LIST = [
     line.strip()
@@ -35,6 +35,11 @@ def setup_dependencies():
 with setup_dependencies():
     import rich
     import typer
+
+    def remove_file(path: Path) -> None:
+        assert path.is_file()
+
+        path.unlink()
 
     def iterfiles(dir: Path) -> Generator[Path, None, None]:
         assert dir.is_dir()
@@ -92,6 +97,9 @@ with setup_dependencies():
         ]
         for file in iterfiles(dir=REPO_BASE):
             format_file(path=file, replacements=REPLACEMENTS)
+
+        for file in FILES_TO_REMOVE:
+            remove_file(path=file)
 
 
 if __name__ == "__main__":
