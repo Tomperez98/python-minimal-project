@@ -1,5 +1,6 @@
-from project import __version__
+from template_project import VERSION, VERSION_SHORT
 
 
 def test_version():
-    assert __version__ == "0.1.0"
+    assert VERSION == "0.1.0."
+    assert VERSION_SHORT == "0.1"
