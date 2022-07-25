@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "sample-setup-python-project"
+version = "0.1.0"
+description = ""
+authors = ["Tomas Perez Alvarez <tomasperezalvarez@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+pytest-cov = "^3.0.0"
+flake8 = "^4.0.1"
+black = {version = "^22.6.0", allow-prereleases = true}
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
