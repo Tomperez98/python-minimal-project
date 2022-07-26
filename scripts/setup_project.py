@@ -38,6 +38,12 @@ def setup_dependencies():
 with setup_dependencies():
     import rich
     import typer
+    from git.repo import Repo
+
+    r = Repo(REPO_BASE)
+    reader = r.config_reader()
+    git_username = reader.get_value("user", "name")
+    git_email = reader.get_value("user", "email")
 
     def move_file_to_root(path: Path) -> None:
         assert path.is_file()
@@ -87,11 +93,21 @@ with setup_dependencies():
             ...,
             prompt="Python package name",
         ),
+        username: str = typer.Option(
+            default=git_username,
+            prompt="Project's author name",
+        ),
+        email: str = typer.Option(
+            default=git_email,
+            prompt="Project's author email",
+        ),
     ):
 
         package_name = package_name.replace("-", "_")
 
         rich.print(f"Package name set to: [cyan]{package_name}[/]")
+        rich.print(f"Project's author name set to: [cyan]{username}[/]")
+        rich.print(f"Project's author email set to: [cyan]{email}[/]")
 
         typer.confirm("All good?", abort=True)
 
@@ -102,12 +118,20 @@ with setup_dependencies():
                 KEY_WORD_TO_REPLACE,
                 package_name,
             ),
+            (
+                "author_name",
+                username,
+            ),
+            (
+                "author_email",
+                email,
+            ),
         ]
         for file in iterfiles(dir=REPO_BASE):
             format_file(path=file, replacements=REPLACEMENTS)
 
-        for file in FILES_TO_REMOVE:
-            remove_file(path=file)
+        # for file in FILES_TO_REMOVE:
+        #     remove_file(path=file)
 
         for file in FILES_TO_ROOT:
             move_file_to_root(path=file)

@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "sample-setup-python-project"
+name = "demo_project"
 version = "0.1.0"
 description = ""
-authors = ["Tomas Perez Alvarez <tomasperezalvarez@gmail.com>"]
+authors = ["author_name <author_email>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -13,6 +13,7 @@ pytest-cov = "^3.0.0"
 flake8 = "^4.0.1"
 black = {version = "^22.6.0", allow-prereleases = true}
 typer = {extras = ["all"], version = "^0.6.1"}
+GitPython = "^3.1.27"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
