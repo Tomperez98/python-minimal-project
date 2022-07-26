@@ -6,14 +6,14 @@ on:
     branches:
       - main
     paths:
-      - "pkg/**"
+      - "template_project/**"
       - "tests/**"
 
   pull_request:
     branches:
       - main
     paths:
-      - "pkg/**"
+      - "template_project/**"
       - "tests/**"
 
 jobs:
