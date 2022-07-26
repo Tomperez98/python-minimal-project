@@ -1,5 +1,4 @@
 import contextlib
-
 import subprocess
 from pathlib import Path
 from typing import Generator, List, Tuple
@@ -29,12 +28,13 @@ KEY_WORD_TO_REPLACE = "template_project"
 
 @contextlib.contextmanager
 def setup_dependencies():
-    subprocess.run(args=["poetry", "add", "typer[all]", "-D"])
-    subprocess.run(args=["poetry", "add", "GitPython", "-D"])
-    yield
-
-    subprocess.run(args=["poetry", "remove", "typer", "-D"])
-    subprocess.run(args=["poetry", "remove", "GitPython", "-D"])
+    try:
+        subprocess.run(args=["poetry", "add", "typer[all]", "-D"])
+        subprocess.run(args=["poetry", "add", "GitPython", "-D"])
+        yield
+    finally:
+        subprocess.run(args=["poetry", "remove", "typer", "-D"])
+        subprocess.run(args=["poetry", "remove", "GitPython", "-D"])
 
 
 with setup_dependencies():
@@ -132,12 +132,14 @@ with setup_dependencies():
         for file in iterfiles(dir=REPO_BASE):
             format_file(path=file, replacements=REPLACEMENTS)
 
-        # for file in FILES_TO_REMOVE:
-        #     remove_file(path=file)
+        for file in FILES_TO_REMOVE:
+            remove_file(path=file)
 
         for file in FILES_TO_ROOT:
             move_file_to_root(path=file)
 
+    typer.run(main)
+
 
 if __name__ == "__main__":
-    typer.run(main)
+    main()
