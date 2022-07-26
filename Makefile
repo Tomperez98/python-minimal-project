@@ -21,6 +21,7 @@ clean: ## Cleans project folder mainly cache
 	rm -rf *.egg-info
 	rm -f .coverage
 	rm -f .coverage.*
+	rm -f coverage.xml
 	rm -rf build
 
 .PHONY: setup
@@ -28,6 +29,21 @@ setup: ## Initial setup for project
 	poetry run python scripts/setup_project.py
 	git add .
 	git commit -m "Initial setup"
+
+.PHONY: lint
+lint: ## Checks code linting
+	poetry run black --check .
+	poetry run isort --check-only .
+	make lint-types
+
+.PHONY: format
+format: ## Formats code
+	poetry run black .
+	poetry run isort .
+
+.PHONY: lint-types
+lint-types: ## Lint project types
+	poetry run mypy . 
 
 
 .PHONY: help
