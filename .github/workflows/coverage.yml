@@ -43,15 +43,21 @@ jobs:
       - name: Build coverage file
         run: poetry run pytest --cache-clear --cov=template_project tests/ > pytest-coverage.txt
 
-      - name: Test with pytest
-        run: poetry run pytest --cache-clear --cov=template_project --cov-report=xml
-
       - name: Comment coverage
         uses: coroo/pytest-coverage-commentator@v1.0.2
+        with:
+          pytest-coverage: pytest-coverage.txt
+
+      #----------------------------------------------
+      #             upload coverage stats
+      # (requires CODECOV_TOKEN in repository secrets)
+      #----------------------------------------------
+      # - name: Test with pytest
+      #   run: poetry run pytest --cov=<project-dir> --cov-report=xml
 
       # - name: Upload coverage
       #   uses: codecov/codecov-action@v1
       #   with:
-      #     # token: ${{ secrets.CODECOV_TOKEN }} # Only required for private repositories
+      #     token: ${{ secrets.CODECOV_TOKEN }} # Only required for private repositories
       #     file: ./coverage.xml
       #     fail_ci_if_error: true
