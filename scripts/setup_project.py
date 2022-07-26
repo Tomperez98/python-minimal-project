@@ -1,6 +1,6 @@
 import contextlib
 
-# import subprocess
+import subprocess
 from pathlib import Path
 from typing import Generator, List, Tuple
 
@@ -29,10 +29,12 @@ KEY_WORD_TO_REPLACE = "template_project"
 
 @contextlib.contextmanager
 def setup_dependencies():
-    # subprocess.run(args=["poetry", "add", "typer[all]", "-D"])
+    subprocess.run(args=["poetry", "add", "typer[all]", "-D"])
+    subprocess.run(args=["poetry", "add", "GitPython", "-D"])
     yield
 
-    # subprocess.run(args=["poetry", "remove", "typer", "-D"])
+    subprocess.run(args=["poetry", "remove", "typer", "-D"])
+    subprocess.run(args=["poetry", "remove", "GitPython", "-D"])
 
 
 with setup_dependencies():

@@ -25,7 +25,7 @@ clean: ## Cleans project folder mainly cache
 
 .PHONY: setup
 setup: ## Initial setup for project
-	python scripts/setup_project.py
+	poetry run python scripts/setup_project.py
 
 
 .PHONY: help
