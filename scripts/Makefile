@@ -21,6 +21,7 @@ clean: ## Cleans project folder mainly cache
 	rm -rf *.egg-info
 	rm -f .coverage
 	rm -f .coverage.*
+	rm -f coverage.xml
 	rm -rf build
 
 
