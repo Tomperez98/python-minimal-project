@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "demo_project"
+name = "template_project"
 version = "0.1.0"
 description = ""
 authors = ["author_name <author_email>"]
