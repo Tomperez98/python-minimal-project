@@ -23,10 +23,6 @@ clean: ## Cleans project folder mainly cache
 	rm -f .coverage.*
 	rm -rf build
 
-.PHONY: setup
-setup: ## Initial setup for project
-	python scripts/setup_project.py
-
 
 .PHONY: help
 .DEFAULT_GOAL := help

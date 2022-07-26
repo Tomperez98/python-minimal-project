@@ -8,7 +8,10 @@ REPO_BASE = (Path(__file__).parent / "..").resolve()
 
 FILES_TO_REMOVE = [
     REPO_BASE / "scripts" / "setup_project.py",
+    REPO_BASE / "Makefile",
 ]
+
+FILES_TO_ROOT = [REPO_BASE / "scripts" / "Makefile"]
 
 GITIGNORE_LIST = [
     line.strip()
@@ -35,6 +38,11 @@ def setup_dependencies():
 with setup_dependencies():
     import rich
     import typer
+
+    def move_file_to_root(path: Path) -> None:
+        assert path.is_file()
+
+        path.rename(REPO_BASE / path.name)
 
     def remove_file(path: Path) -> None:
         assert path.is_file()
@@ -100,6 +108,9 @@ with setup_dependencies():
 
         for file in FILES_TO_REMOVE:
             remove_file(path=file)
+
+        for file in FILES_TO_ROOT:
+            move_file_to_root(path=file)
 
 
 if __name__ == "__main__":
