@@ -5,34 +5,7 @@ OS = $(shell uname | tr A-Z a-z)
 
 .PHONY: test
 test: ## Run tests
-	poetry run pytest --cov-report html --cov-report xml --cov-report annotate --cov=template_project tests/
-
-
-.PHONY: clean
-clean: ## Cleans project folder mainly cache
-	rm -rf `find . -name __pycache__`
-	rm -f `find . -type f -name '*.py[co]' `
-	rm -f `find . -type f -name '*~' `
-	rm -f `find . -type f -name '.*~' `
-	rm -rf .cache
-	rm -rf .pytest_cache
-	rm -rf .mypy_cache
-	rm -rf htmlcov
-	rm -rf *.egg-info
-	rm -f .coverage
-	rm -f .coverage.*
-	rm -f coverage.xml
-	rm -rf build
-
-
-# A Self-Documenting Makefile: http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
-
-SHELL = /bin/bash
-OS = $(shell uname | tr A-Z a-z)
-
-.PHONY: test
-test: ## Run tests
-	poetry run pytest --cov-report html --cov-report xml --cov-report annotate --cov=template_project tests/
+	poetry run pytest --cov-report html --cov-report xml --cov-report annotate --cov=pkg tests/
 
 
 .PHONY: clean
