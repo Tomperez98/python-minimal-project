@@ -48,7 +48,7 @@ jobs:
         run: poetry install --no-interaction
 
       - name: Build coverage file
-        run: poetry run pytest --cache-clear --cov=template_project tests/ > pytest-coverage.txt
+        run: poetry run pytest --cov-report term:skip-covered --cov-report term-missing --cache-clear --cov=template_project tests/ > pytest-coverage.txt
 
       - name: Comment coverage
         uses: coroo/pytest-coverage-commentator@v1.0.2

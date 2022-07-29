@@ -28,3 +28,9 @@ exclude = [
 [tool.isort]
 profile = "black"
 skip_gitignore = true
+
+[tool.coverage.report]
+exclude_lines = [
+    'pragma: no cover',
+    'pass',
+]
