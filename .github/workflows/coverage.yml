@@ -68,3 +68,16 @@ jobs:
       #     token: ${{ secrets.CODECOV_TOKEN }} # Only required for private repositories
       #     file: ./coverage.xml
       #     fail_ci_if_error: true
+
+  coverage-badge:
+    runs-on: ubuntu-latest
+    needs: coverage
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Build coverage badge
+        run: coverage-badge -o coverage.svg
+
+      - name: Add coverage badge to repo
+        uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
