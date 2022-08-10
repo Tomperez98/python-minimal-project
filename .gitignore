@@ -162,3 +162,6 @@ cython_debug/
 # All images expect coverage.svg
 *.svg
 !coverage.svg
+
+# Ignore pytest coverage report
+pytest-coverage.txt
