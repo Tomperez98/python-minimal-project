@@ -57,7 +57,7 @@ jobs:
 
       - name: Coverage badge
         if: github.ref == 'refs/heads/main'
-        run: coverage-badge -o coverage.svg
+        run: poetry run coverage-badge -fo coverage.svg
 
       - name: Add coverage badge to repo
         if: github.ref == 'refs/heads/main'
