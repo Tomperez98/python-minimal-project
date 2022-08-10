@@ -87,7 +87,7 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' && matrix.badgeTarget }}
         uses: EndBug/add-and-commit@v9
         with:
-          add: "badges/coverage.svg"
+          add: "badges/coverage.svg, badges/python-versions.svg"
       #----------------------------------------------
       #             upload coverage stats
       # (requires CODECOV_TOKEN in repository secrets)
