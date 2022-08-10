@@ -59,12 +59,11 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: poetry run coverage-badge -fo coverage.svg
 
-      # - name: Add coverage badge to repo
-      #   if: github.ref == 'refs/heads/main'
-      #   uses: mikeal/publish-to-github-action@master
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     BRANCH_NAME: "main"
+      - name: push badge to branch
+        if: github.ref == 'refs/heads/main'
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "coverage.svg"
       #----------------------------------------------
       #             upload coverage stats
       # (requires CODECOV_TOKEN in repository secrets)
