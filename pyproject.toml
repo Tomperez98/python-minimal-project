@@ -16,7 +16,6 @@ black = {version = "^22.6.0", allow-prereleases = true}
 isort = "^5.10.1"
 mypy = "^0.971"
 coverage-badge = "^1.1.0"
-pybadges = "^3.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -78,16 +78,11 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' && matrix.badgeTarget }}
         run: poetry run coverage-badge -fo badges/coverage.svg
 
-      - name: Python versions badge
-        if: ${{ github.ref == 'refs/heads/main' && matrix.badgeTarget }}
-        run: |
-          poetry run python -m pybadges --left-text="python" --right-text="3.9 | 3.10" --logo='https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/python.svg' --embed-logo > badges/python-versions.svg
-
       - name: push badges to branch
         if: ${{ github.ref == 'refs/heads/main' && matrix.badgeTarget }}
         uses: EndBug/add-and-commit@v9
         with:
-          add: "badges/coverage.svg badges/python-versions.svg"
+          add: "badges/coverage.svg"
       #----------------------------------------------
       #             upload coverage stats
       # (requires CODECOV_TOKEN in repository secrets)
