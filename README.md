@@ -1,4 +1,6 @@
-# What is this? ![Coverage Badge](badges/coverage.svg)
+# What is this?
+![Coverage Badge](badges/coverage.svg)
+![example workflow](https://github.com/Tomperez98/python-minimal-project/actions/workflows/coverage.yml/badge.svg)
 
 Sample Python project setup with minimal requirements
 
