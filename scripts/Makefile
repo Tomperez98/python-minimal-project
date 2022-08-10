@@ -24,6 +24,7 @@ clean: ## Cleans project folder mainly cache
 	rm -f coverage.xml
 	rm -rf build
 	find tests template_project -empty -type d -delete
+	rm coverage.svg
 
 
 .PHONY: lint

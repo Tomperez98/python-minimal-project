@@ -1,4 +1,4 @@
-# What is this?
+# What is this? ![Coverage Badge](coverage.svg)
 
 Sample Python project setup with minimal requirements
 
