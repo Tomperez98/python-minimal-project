@@ -1,4 +1,4 @@
-# What is this? ![Coverage Badge](badges/coverage.svg) ![Python versions](badges/python-versions.svg)
+# What is this? ![Coverage Badge](badges/coverage.svg)
 
 Sample Python project setup with minimal requirements
 
