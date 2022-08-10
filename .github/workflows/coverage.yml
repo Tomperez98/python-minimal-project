@@ -8,6 +8,7 @@ on:
     paths:
       - "template_project/**"
       - "tests/**"
+      - "badges/**"
 
   pull_request:
     branches:
