@@ -16,6 +16,7 @@ on:
     paths:
       - "template_project/**"
       - "tests/**"
+      - "badges/**"
 
 jobs:
   coverage:
