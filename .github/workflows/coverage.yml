@@ -81,7 +81,7 @@ jobs:
       - name: Python versions badge
         if: ${{ github.ref == 'refs/heads/main' && matrix.badgeTarget }}
         run: |
-          poetry run python -m pybadges --left-text="python" --right-text=${{ matrix.python }} --logo='https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/python.svg' --embed-logo > badges/python-versions.svg
+          poetry run python -m pybadges --left-text="python" --right-text="3.19 | 3.10" --logo='https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/python.svg' --embed-logo > badges/python-versions.svg
 
       - name: push badges to branch
         if: ${{ github.ref == 'refs/heads/main' && matrix.badgeTarget }}
