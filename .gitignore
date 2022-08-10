@@ -162,6 +162,7 @@ cython_debug/
 # All images expect coverage.svg
 *.svg
 !badges/coverage.svg
+!badges/python-versions.svg
 
 # Ignore pytest coverage report
 pytest-coverage.txt
