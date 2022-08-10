@@ -20,13 +20,25 @@ on:
 
 jobs:
   coverage:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        python: ["3.9", "3.10"]
+        os: [ubuntu-lastest]
+        include:
+          - os: ubuntu-latest
+            python: 3.10
+            badgeTarget: true
+    runs-on: ${{ matrix.os }}
     steps:
+      - name: Print build information
+        run: "echo head_ref: ${{ github.head_ref }}, ref: ${{ github.ref }}, os: ${{ matrix.os }}, python: ${{ matrix.python }}"
+
       - uses: actions/checkout@v3
       - name: Set up Python 3.9
         uses: actions/setup-python@v4
         with:
-          python-version: 3.9
+          python-version: ${{ matrix.python }}
 
       - name: Install Poetry
         uses: snok/install-poetry@v1
@@ -49,20 +61,30 @@ jobs:
       - name: Install library
         run: poetry install --no-interaction
 
+      - name: Run tests
+        run: poetry run pytest --cache-clear
+
       - name: Build coverage file
+        if: ${{ matrix.badgeTarget }}
         run: poetry run pytest --cov-report term:skip-covered --cov-report term-missing --cache-clear --cov=template_project tests/ > pytest-coverage.txt
 
       - name: Comment coverage
+        if: ${{ matrix.badgeTarget }}
         uses: coroo/pytest-coverage-commentator@v1.0.2
         with:
           pytest-coverage: pytest-coverage.txt
 
       - name: Coverage badge
-        if: github.ref == 'refs/heads/main'
+        if: ${{ github.ref == 'refs/heads/main' && matrix.badgeTarget }}
         run: poetry run coverage-badge -fo badges/coverage.svg
 
-      - name: push badge to branch
-        if: github.ref == 'refs/heads/main'
+      - name: Python versions badge
+        if: ${{ github.ref == 'refs/heads/main' && matrix.badgeTarget }}
+        run: |
+          poetry run python -m pybadges --left-text="python" --right-text="3.9 | 3.10" --logo='https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/python.svg' --whole-link="https://www.python.org/" --embed-logo > badges/python-versions.svg
+
+      - name: push badges to branch
+        if: ${{ github.ref == 'refs/heads/main' && matrix.badgeTarget }}
         uses: EndBug/add-and-commit@v9
         with:
           add: "badges/coverage.svg"
