@@ -23,8 +23,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        python: ["3.9", "3.10"]
-        os: [ubuntu-lastest]
+        python: ["3.7", "3.10"]
+        os: [ubuntu-latest]
         include:
           - os: ubuntu-latest
             python: 3.10
