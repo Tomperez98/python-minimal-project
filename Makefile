@@ -9,7 +9,6 @@ setup: ## Initial setup for project
 	git add .
 	git commit -m "Initial setup"
 
-
 .PHONY: help
 .DEFAULT_GOAL := help
 help:

@@ -42,6 +42,9 @@ format: ## Formats code
 lint-types: ## Lint project types
 	poetry run mypy . 
 
+.PHONY: python-versions-badge
+python-versions-badge: ## Creates badge so client know supported python versions. (args-> versions (string))
+	python -m pybadges --left-text="python" --right-text="$(versions)" --whole-link="https://www.python.org/" --embed-logo --logo='https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/python.svg' > badges/python-versions.svg
 
 .PHONY: help
 .DEFAULT_GOAL := help
