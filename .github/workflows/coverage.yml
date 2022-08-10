@@ -55,6 +55,15 @@ jobs:
         with:
           pytest-coverage: pytest-coverage.txt
 
+      - name: Coverage badge
+        if: github.ref == 'refs/heads/main'
+        run: coverage-badge -o coverage.svg
+
+      - name: Add coverage badge to repo
+        if: github.ref == 'refs/heads/main'
+        uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #----------------------------------------------
       #             upload coverage stats
       # (requires CODECOV_TOKEN in repository secrets)
@@ -68,16 +77,3 @@ jobs:
       #     token: ${{ secrets.CODECOV_TOKEN }} # Only required for private repositories
       #     file: ./coverage.xml
       #     fail_ci_if_error: true
-
-  coverage-badge:
-    runs-on: ubuntu-latest
-    needs: coverage
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - name: Build coverage badge
-        run: coverage-badge -o coverage.svg
-
-      - name: Add coverage badge to repo
-        uses: mikeal/publish-to-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
