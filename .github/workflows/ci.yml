@@ -78,11 +78,12 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' && matrix.badgeTarget }}
         run: poetry run coverage-badge -fo badges/coverage.svg
 
-      - name: push badges to branch
+      - name: Create badges pull request
         if: ${{ github.ref == 'refs/heads/main' && matrix.badgeTarget }}
-        uses: EndBug/add-and-commit@v9
+        uses: peter-evans/create-pull-request@v4
         with:
-          add: "badges/coverage.svg"
+          add-paths: |
+            "badges/*.svg"
       #----------------------------------------------
       #             upload coverage stats
       # (requires CODECOV_TOKEN in repository secrets)
