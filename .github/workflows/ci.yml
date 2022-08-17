@@ -81,9 +81,6 @@ jobs:
       - name: Create badges pull request
         if: ${{ github.ref == 'refs/heads/main' && matrix.badgeTarget }}
         uses: peter-evans/create-pull-request@v4
-        with:
-          add-paths: |
-            "badges/*.svg"
       #----------------------------------------------
       #             upload coverage stats
       # (requires CODECOV_TOKEN in repository secrets)
