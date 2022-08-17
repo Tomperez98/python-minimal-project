@@ -8,7 +8,6 @@ on:
     paths:
       - "template_project/**"
       - "tests/**"
-      - "badges/**"
 
   pull_request:
     branches:
@@ -16,7 +15,6 @@ on:
     paths:
       - "template_project/**"
       - "tests/**"
-      - "badges/**"
 
 jobs:
   coverage:
@@ -81,6 +79,13 @@ jobs:
       - name: Create badges pull request
         if: ${{ github.ref == 'refs/heads/main' && matrix.badgeTarget }}
         uses: peter-evans/create-pull-request@v4
+        with:
+          title: Updating coverage badge
+          delete-branch: true
+          commit-message: automated change
+          branch: update-coverage-badge
+          add-paths: |
+            badges/coverage.svg
       #----------------------------------------------
       #             upload coverage stats
       # (requires CODECOV_TOKEN in repository secrets)
