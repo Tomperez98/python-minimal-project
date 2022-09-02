@@ -12,7 +12,7 @@ loguru = "^0.6.0"
 pytest = "^7.1"
 pytest-cov = "^3.0.0"
 flake8 = "^5.0.4"
-black = {version = "^22.6.0", allow-prereleases = true}
+black = {version = "^22.8.0", allow-prereleases = true}
 isort = "^5.10.1"
 mypy = "^0.971"
 coverage-badge = "^1.1.0"
