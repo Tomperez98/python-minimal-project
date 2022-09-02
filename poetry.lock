@@ -401,7 +401,7 @@ dev = ["black (>=19.3b0)", "pytest (>=4.6.2)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "c83b48693ce33a2b8ac13e70be13d554f63855d81a1f7dabd40725f9e775efc3"
+content-hash = "a9112864366ee4f57e73242084fa6a010d62101e886de0900747edd422c92110"
 
 [metadata.files]
 attrs = [
