@@ -7,7 +7,9 @@ OS = $(shell uname | tr A-Z a-z)
 test: ## Run tests
 	poetry run pytest --cov-report term:skip-covered --cov-report term-missing --cov=template_project tests/
 
-
+.PHONY: new-release
+new-release: ## Creates a new release
+	@./scripts/release.sh
 .PHONY: clean
 clean: ## Cleans project folder mainly cache
 	rm -rf `find . -name __pycache__`
