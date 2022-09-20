@@ -10,6 +10,7 @@ test: ## Run tests
 .PHONY: new-release
 new-release: ## Creates a new release
 	@./scripts/release.sh
+
 .PHONY: clean
 clean: ## Cleans project folder mainly cache
 	rm -rf `find . -name __pycache__`
@@ -33,6 +34,7 @@ clean: ## Cleans project folder mainly cache
 lint: ## Checks code linting
 	poetry run black --check .
 	poetry run isort --check-only .
+	poetry run flake8 template_project/ tests/
 	make lint-types
 
 .PHONY: format
