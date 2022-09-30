@@ -9,9 +9,13 @@ setup: ## Initial setup for project
 	git add .
 	git commit -m "Initial setup"
 
-.PHONY: new-release
-new-release: ## Creates a new release for the project
+.PHONY: new-tag
+new-tag: ## Creates a new tag for the project
 	@bash ./scripts/release.sh
+
+.PHONY: rollback-new-tag
+rollback-new-tag: ## Rollbacks new tag creation. In case something went wrong
+	@git tag -l | xargs git tag -d && git fetch -t
 
 .PHONY: help
 .DEFAULT_GOAL := help
