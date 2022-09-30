@@ -31,6 +31,7 @@ exclude = [
 
 [tool.coverage.report]
 precision = 2
+fail_under = 60
 exclude_lines = [
     'pragma: no cover',
     'raise NotImplementedError',
@@ -38,11 +39,11 @@ exclude_lines = [
     'if TYPE_CHECKING:',
     '@overload',
 ]
-
-[tool.coverage.run]
 omit = [
     "./*/_logger.py",
 ]
+skip_empty = true
+skip_covered = true
 
 [tool.black]
 color = false

@@ -5,7 +5,7 @@ OS = $(shell uname | tr A-Z a-z)
 
 .PHONY: test
 test: ## Run tests
-	poetry run pytest --cov-report term:skip-covered --cov-report term-missing --cov=template_project tests/
+	poetry run pytest --cov-report term-missing --cov=template_project tests/
 
 .PHONY: new-release
 new-release: ## Creates a new release
