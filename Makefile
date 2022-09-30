@@ -9,6 +9,10 @@ setup: ## Initial setup for project
 	git add .
 	git commit -m "Initial setup"
 
+.PHONY: new-release
+new-release: ## Creates a new release for the project
+	@bash ./scripts/release.sh
+
 .PHONY: help
 .DEFAULT_GOAL := help
 help:
