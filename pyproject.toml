@@ -30,7 +30,7 @@ exclude = [
 ]
 
 [tool.coverage.report]
-precision = 2
+precision = 0
 fail_under = 60
 exclude_lines = [
     'pragma: no cover',
