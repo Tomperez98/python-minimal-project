@@ -20,6 +20,8 @@ shared_processors = [
     structlog.processors.format_exc_info,
 ]
 if sys.stderr.isatty():
+    # Pretty printing when we run in a terminal session.
+    # Automatically prints pretty tracebacks when "rich" is installed
     processors = shared_processors + [
         structlog.stdlib.PositionalArgumentsFormatter(),
         structlog.processors.StackInfoRenderer(),
@@ -28,6 +30,8 @@ if sys.stderr.isatty():
     factory = structlog.PrintLoggerFactory()
 
 else:
+    # Print JSON when we run, e.g., in a Docker container.
+    # Also print structured tracebacks.
     processors = shared_processors + [
         structlog.processors.dict_tracebacks,
         structlog.processors.JSONRenderer(serializer=orjson.dumps),
