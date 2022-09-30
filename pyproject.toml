@@ -39,6 +39,11 @@ exclude_lines = [
     '@overload',
 ]
 
+[tool.coverage.run]
+omit = [
+    "./*/_logger.py",
+]
+
 [tool.black]
 color = false
 line-length = 88
