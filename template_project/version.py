@@ -6,6 +6,6 @@ _MINOR = "1"
 # released build.
 _PATCH = "0"
 
-_SUFFIX = ""
+_SUFFIX = "a"
 VERSION_SHORT = f"{_MAJOR}.{_MINOR}"
 VERSION = f"{_MAJOR}.{_MINOR}.{_PATCH}.{_SUFFIX}"

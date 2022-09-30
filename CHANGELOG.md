@@ -7,4 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [v0.1.0.a](https://github.com/allenai/python-package-template/releases/tag/v0.1.0.a) - 2022-09-30
+
 ## [v0.1.0.](https://github.com/allenai/python-package-template/releases/tag/v0.1.0.) - 2022-09-30
