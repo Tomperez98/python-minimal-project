@@ -2,6 +2,8 @@
 This is aimed to replace print. To use the implemented config do:
 
 from template_project.utils.log import get_logger
+
+logger = get_logger(__name__)
 """
 
 import logging
