@@ -38,7 +38,8 @@ exclude_lines = [
     '@overload',
 ]
 omit = [
-    "./*/_logger.py",
+    "template_project/utils/log.py",
+    "template_project/utils/env_vars.py",
 ]
 skip_empty = true
 skip_covered = true
