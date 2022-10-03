@@ -6,8 +6,6 @@ authors = ["author_name <author_email>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-structlog = "^22.1.0"
-orjson = "^3.8.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1"
@@ -40,7 +38,8 @@ exclude_lines = [
     '@overload',
 ]
 omit = [
-    "./*/_logger.py",
+    "template_project/utils/log.py",
+    "template_project/utils/env_vars.py",
 ]
 skip_empty = true
 skip_covered = true
