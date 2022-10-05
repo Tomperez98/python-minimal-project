@@ -38,9 +38,9 @@ def setup_dependencies():
 
 
 with setup_dependencies():
-    import rich
-    import typer
-    from git.repo import Repo
+    import rich  # type: ignore
+    import typer  # type: ignore
+    from git.repo import Repo  # type: ignore
 
     r = Repo(REPO_BASE)
     reader = r.config_reader()
