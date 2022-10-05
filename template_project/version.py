@@ -5,7 +5,5 @@ _MINOR = "1"
 # On main and in a nightly release the patch should be one ahead of the last
 # released build.
 _PATCH = "0"
-
-_SUFFIX = "a"
 VERSION_SHORT = f"{_MAJOR}.{_MINOR}"
-VERSION = f"{_MAJOR}.{_MINOR}.{_PATCH}.{_SUFFIX}"
+VERSION = f"{_MAJOR}.{_MINOR}.{_PATCH}"
