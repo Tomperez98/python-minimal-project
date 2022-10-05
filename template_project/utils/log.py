@@ -1,7 +1,7 @@
 """
 This is aimed to replace print. To use the implemented config do:
 
-from baby_dbt.utils.log import get_logger
+from template_project.utils.log import get_logger
 
 logger = get_logger()
 """
