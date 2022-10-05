@@ -6,6 +6,7 @@ authors = ["author_name <author_email>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+loguru = "^0.6.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1"

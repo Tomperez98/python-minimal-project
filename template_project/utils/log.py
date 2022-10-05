@@ -1,40 +1,75 @@
 """
 This is aimed to replace print. To use the implemented config do:
 
-from template_project.utils.log import get_logger
+from baby_dbt.utils.log import get_logger
 
-logger = get_logger(__name__)
+logger = get_logger()
 """
 
-import logging
+
+import enum
+import functools
 import sys
+import time
 
-from template_project.utils.env_vars import is_debug_mode_on
+from loguru import logger
 
-FORMATTER = logging.Formatter("%(asctime)s — %(name)s — %(levelname)s — %(message)s")
+
+class LogLevels(str, enum.Enum):
+    DEBUG = "DEBUG"
+    INFO = "INFO"
+
+
 LOG_FILE = "template_project.log"
+LOG_LEVEL = LogLevels.DEBUG
 
 
-def get_console_handler():
-    console_handler = logging.StreamHandler(sys.stdout)
-    console_handler.setFormatter(FORMATTER)
-    console_handler.setLevel(logging.DEBUG if is_debug_mode_on() else logging.INFO)
-    return console_handler
-
-
-def get_file_handler():
-    file_handler = logging.FileHandler(LOG_FILE)
-    file_handler.setFormatter(FORMATTER)
-    file_handler.setLevel(logging.DEBUG)
-    return file_handler
-
-
-def get_logger(logger_name):
-    logger = logging.getLogger(logger_name)
-    logger.setLevel(logging.DEBUG)
-    logger.addHandler(get_console_handler())
-    logger.addHandler(get_file_handler())
-
-    # with this pattern, it's rarely necessary to propagate the error up to parent
-    logger.propagate = False
+def __config_logger():
+    logger.remove()
+    logger.add(sys.stderr, level=LOG_LEVEL)
+    logger.add(LOG_FILE, level=LOG_LEVEL)
     return logger
+
+
+def get_logger():
+    return __config_logger()
+
+
+def logger_wraps(
+    *,
+    entry: bool = True,
+    exit: bool = True,
+    level: str = LogLevels.DEBUG,
+):
+    """
+    What does this answer?
+     - When did the function execution started and with which params?
+     - How much time does the function took to run?
+     - When did the function execution finished and with with result?
+
+    @logger_wraps()
+    def some_function():
+        return ...
+    """
+
+    def wrapper(func):
+        name = func.__name__
+
+        @functools.wraps(func)
+        def wrapped(*args, **kwargs):
+            logger_ = logger.opt(depth=1)
+            if entry:
+                logger_.log(
+                    level, "Entering '{}' (args={}, kwargs={})", name, args, kwargs
+                )
+            start = time.time()
+            result = func(*args, **kwargs)
+            end = time.time()
+            logger_.log(level, "Function '{}' executed in {:f} s", name, end - start)
+            if exit:
+                logger_.log(level, "Exiting '{}' (result={})", name, result)
+            return result
+
+        return wrapped
+
+    return wrapper
