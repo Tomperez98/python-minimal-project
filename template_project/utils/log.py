@@ -9,6 +9,7 @@ logger = get_logger()
 
 import enum
 import functools
+import json
 import sys
 import time
 
@@ -24,9 +25,25 @@ LOG_FILE = "loans.log"
 LOG_LEVEL = LogLevels.DEBUG
 
 
+def serialize(record):
+    subset = {"timestamp": record["time"].timestamp(), "message": record["message"]}
+    return json.dumps(subset)
+
+
+def structured_log_formmater(record):
+    record["extra"]["serialized"] = serialize(record=record)
+    return "{extra[serialized]}\n"
+
+
 def configured_logger_factory():
     logger.remove()
-    logger.add(LOG_FILE, level=LOG_LEVEL)
+
+    logger.add(
+        LOG_FILE,
+        level=LOG_LEVEL,
+        format=structured_log_formmater,
+        serialize=True,
+    )
     if LOG_LEVEL == LogLevels.INFO:
         logger.add(
             sys.stderr,
