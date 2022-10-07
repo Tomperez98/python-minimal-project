@@ -1,7 +1,7 @@
 """
 This is aimed to replace print. To use the implemented config do:
 
-from template_project.utils.log import get_logger
+from loans.utils.log import get_logger
 
 logger = get_logger()
 """
@@ -20,19 +20,28 @@ class LogLevels(str, enum.Enum):
     INFO = "INFO"
 
 
-LOG_FILE = "template_project.log"
+LOG_FILE = "loans.log"
 LOG_LEVEL = LogLevels.DEBUG
 
 
-def __config_logger():
+def configured_logger_factory():
     logger.remove()
-    logger.add(sys.stderr, level=LOG_LEVEL)
     logger.add(LOG_FILE, level=LOG_LEVEL)
+    if LOG_LEVEL == LogLevels.INFO:
+        logger.add(
+            sys.stderr,
+            level=LOG_LEVEL,
+            format="{time: YYYY-MM-DD HH:mm:ss} | {level} | {message}",
+        )
+    elif LOG_LEVEL == LogLevels.DEBUG:
+        logger.add(sys.stderr, level=LOG_LEVEL)
+    else:
+        raise Exception
     return logger
 
 
 def get_logger():
-    return __config_logger()
+    return configured_logger_factory()
 
 
 def logger_wraps(
