@@ -16,6 +16,15 @@ import time
 from loguru import logger
 
 
+class NotSupportedLogLevelError(Exception):
+    """
+    Exception raised if selected log level is not supported
+    """
+
+    def __init__(self) -> None:
+        super().__init__("Selected log level is not supported")
+
+
 class LogLevels(str, enum.Enum):
     DEBUG = "DEBUG"
     INFO = "INFO"
@@ -53,7 +62,7 @@ def configured_logger_factory():
     elif LOG_LEVEL == LogLevels.DEBUG:
         logger.add(sys.stderr, level=LOG_LEVEL)
     else:
-        raise Exception
+        raise NotSupportedLogLevelError
     return logger
 
 
