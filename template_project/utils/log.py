@@ -55,12 +55,15 @@ def configured_logger_factory():
     )
     if LOG_LEVEL == LogLevels.INFO:
         logger.add(
-            sys.stderr,
+            sys.stdout,
             level=LOG_LEVEL,
             format="{time: YYYY-MM-DD HH:mm:ss} | {level} | {message}",
         )
     elif LOG_LEVEL == LogLevels.DEBUG:
-        logger.add(sys.stderr, level=LOG_LEVEL)
+        logger.add(
+            sys.stdout,
+            level=LOG_LEVEL,
+        )
     else:
         raise NotSupportedLogLevelError
     return logger
